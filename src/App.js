@@ -14,6 +14,10 @@ class App extends Component {
         <div className="App-header">
           <h1>Route Finder</h1>
         </div>
+        <div>
+          <input type="text" placeholder="location"></input>
+          <button type="submit">Search</button>
+        </div>
         <div id='map'>
           <Maps />
         </div>
