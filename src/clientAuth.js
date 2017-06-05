@@ -50,7 +50,18 @@ const clientAuth = {
       delete axios.defaults.headers.common['x-access-token']
       resolve("bye.")
     })
+  },
+
+  addRoute: (newRoute) => {
+    return axios({
+      url: '/route',
+      method: 'post',
+      data: newRoute
+    })
   }
+
+
+//// end const
 }
 
 clientAuth.setTokenHeader()
