@@ -17,7 +17,7 @@ const clientAuth = {
 
   signUp: (userInfo) => {
     return axios({
-      url: '/api/users',
+      url: '/users',
       method: 'post',
       data: userInfo
     })
@@ -25,7 +25,7 @@ const clientAuth = {
 
   logIn: (credentials) => { // doesn't attach tokens to heads for people who are logged in
     return axios({
-      url: '/api/users/login',
+      url: '/users/login',
       method: 'post',
       data: credentials
     })
@@ -56,13 +56,11 @@ const clientAuth = {
 
   addRoute: (newRoute) => {
     return axios({
-      url: '/route',
+      url: '/routes',
       method: 'post',
       data: newRoute
     })
   }
-
-
 //// end const
 }
 

@@ -65,7 +65,6 @@ render() {
   return (
       <div>
           <button name='home' onClick={this._setView.bind(this)}>Home</button>
-        {this.state.loggedIn ? 'Welcome, ' + this.state.currentUser.name : ''}
           {!this.state.loggedIn && (
               <button name='signup' onClick={this._setView.bind(this)}>Sign Up</button>
           )}
@@ -73,7 +72,7 @@ render() {
             <button name='login' onClick={this._setView.bind(this)}>Log In</button>
           )}
           {this.state.loggedIn && (
-            <button onClick={this._logOut.bind(this)}>Log Out</button>
+            <button onClick={this._logOut.bind(this)}>Log Out: {this.state.currentUser.name}</button>
           )}
         {{
           home: <div id="map"><Maps /></div>,

@@ -24,10 +24,6 @@
     z-index: 1;
 }
 
-#map {
-  z-index: 0;
-}
-
 .lng, .lat {
   display: inline;
   margin: 5px;

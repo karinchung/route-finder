@@ -11,9 +11,11 @@ class Maps extends Component {
     this.state = {
       newRoute: null,
       routes: [],
-      tempMarkerCoords: [0, 0],
+      tempMarkerCoords: null,
+      coordinates: [0, 0],
       modal: null,
-      showModal: false
+      showModal: false,
+      center: [-116.147202, 34.001124]
     }
   }
 
@@ -29,13 +31,22 @@ class Maps extends Component {
     evt.preventDefault()
     const newRoute = {
       name: this.refs.routeName.value,
-      rating: this.refs.rating.value
+      rating: this.refs.rating.value,
+      coordinates: this.state.coordinates
     }
-    // show error if not a logged in user
     clientAuth.addRoute(newRoute).then(res => {
+      console.log(res.data)
       this.setState({
-        routes: res.data
+        routes: [
+          ...this.state.routes,
+          res.data.route
+        ],
+        showModal: false,
+        tempMarkerCoords: null
       })
+      this.refs.routeName.value = ""
+      this.refs.rating.value = ""
+      console.log(res.data)
     })
   }
 
@@ -46,6 +57,7 @@ class Maps extends Component {
         var lat = e.lngLat.lat
         this.setState({
           tempMarkerCoords: [lng, lat],
+          coordinates: [lng, lat],
           showModal: true
         })
       })
@@ -61,7 +73,12 @@ class Maps extends Component {
     })
   }
 
+  _handleDrag(theMap) {
+    console.log(theMap)
+  }
+
   render() {
+    console.log(this.state.routes)
     const routes = this.state.routes.map((route, i) => {
       return (
         <Marker
@@ -71,12 +88,7 @@ class Maps extends Component {
         </Marker>
       )
     })
-    const divStyle = {
-      display: 'none'
-    }
-    const divStyleApplied = {
-      display: 'block'
-    }
+
     return (
       <div>
         <div>
@@ -92,10 +104,10 @@ class Maps extends Component {
         </div> */}
 
         <div id='info' style={this.state.showModal ? {display: 'block'} : {display: 'none'}}>
-          <button onClick={this._closeModal.bind(this)} className="tempModal">X</button>
+          <button onClick={this._closeModal.bind(this)} className="tempModal">x</button>
           <div style={{clear: 'both'}}>
-            <p className="lng">LNG:  {this.state.tempMarkerCoords[0]}</p>
-            <p className="lng">LAT:  {this.state.tempMarkerCoords[1]}</p> <br/>
+            <p className="lng">LNG:  {this.state.coordinates[0]}</p>
+            <p className="lng">LAT:  {this.state.coordinates[1]}</p> <br/>
           </div>
             <form>
               <input className="routeName" type="text" placeholder="Route Name" ref="routeName" />
@@ -111,8 +123,9 @@ class Maps extends Component {
             containerStyle={{height: "80vh"}}
             zoom='9'
             // change below to user coordinates if allowed... or this
-            center={[-116.147202, 34.001124]}
+            center={this.state.center}
             onClick={this._showCoordinates.bind(this)}
+            onDrag={this._handleDrag.bind(this)}
             >
             {/* All routes */}
             {routes}
@@ -126,8 +139,9 @@ class Maps extends Component {
           </ReactMapboxGl>
         </div>
       </div>
-
+      // end return
     )
+    // end render
   }
 
 }
