@@ -11,8 +11,9 @@ class Maps extends Component {
     this.state = {
       newRoute: null,
       routes: [],
-      tempMarkerCoords: null,
-      modal: null
+      tempMarkerCoords: [0, 0],
+      modal: null,
+      showModal: false
     }
   }
 
@@ -25,7 +26,17 @@ class Maps extends Component {
   }
 
   _addRoute(evt) {
-    console.log(evt)
+    evt.preventDefault()
+    const newRoute = {
+      name: this.refs.routeName.value,
+      rating: this.refs.rating.value
+    }
+    // show error if not a logged in user
+    clientAuth.addRoute(newRoute).then(res => {
+      this.setState({
+        routes: res.data
+      })
+    })
   }
 
   _showCoordinates(theMap) {
@@ -33,22 +44,21 @@ class Maps extends Component {
       theMap.on('click', (e) => {
         var lng = e.lngLat.lng
         var lat = e.lngLat.lat
-        var tempModal = document.getElementById('info')
-        tempModal.innerHTML =
-        '<span className="tempModal" style="display: block; text-align: right;">X</span>' +
-        '<input type="text" placeholder="Route Name" ref="routeName" />' +
-        '<input type="number" placeholder="Rating" ref="rating" />' + '<br>' +
-        'lng: ' + JSON.stringify(lng) + ' ' +
-        'lat: ' + JSON.stringify(lat) + '<br>' +
-        '<button className="button-primary" type="submit" onClick={this._addRoute.bind(this)}>save</button>'
         this.setState({
           tempMarkerCoords: [lng, lat],
+          showModal: true
         })
       })
       this.setState({
         newRoute: theMap
       })
     }
+  }
+
+  _closeModal() {
+    this.setState({
+      showModal: false
+    })
   }
 
   render() {
@@ -71,7 +81,7 @@ class Maps extends Component {
       <div>
         <div>
           <input type="text" placeholder="location"></input>
-          <button type="submit">Search</button>
+          <button className="button-primary" type="submit">Search</button>
         </div>
 
         {/* <div id="menu">
@@ -81,7 +91,19 @@ class Maps extends Component {
           <label for='satellite'>satellite</label>
         </div> */}
 
-        <div id='info' style={this.state.newRoute ? divStyleApplied : divStyle}></div>
+        <div id='info' style={this.state.showModal ? {display: 'block'} : {display: 'none'}}>
+          <button onClick={this._closeModal.bind(this)} className="tempModal">X</button>
+          <div style={{clear: 'both'}}>
+            <p className="lng">LNG:  {this.state.tempMarkerCoords[0]}</p>
+            <p className="lng">LAT:  {this.state.tempMarkerCoords[1]}</p> <br/>
+          </div>
+            <form>
+              <input className="routeName" type="text" placeholder="Route Name" ref="routeName" />
+              <input className="rating" type="text" placeholder="Rating" ref="rating" /><br/>
+              <button onClick={this._addRoute.bind(this)} className="button-primary" type="submit">save</button>
+            </form>
+
+        </div>
         <div id='map'>
           <ReactMapboxGl
             style="mapbox://styles/mapbox/outdoors-v10"
