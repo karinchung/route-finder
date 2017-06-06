@@ -35,24 +35,15 @@ class Maps extends Component {
         console.log('lng: ', lng, 'lat: ', lat)
 
         document.getElementById('info').innerHTML =
+        '<input type="text" placeholder="Route Name" />' + '<br>' +
+        '<input type="number" placeholder="Rating" />' + '<br>' +
         'lng: ' + JSON.stringify(lng) + ' ' +
-        'lat: ' + JSON.stringify(lat)
+        'lat: ' + JSON.stringify(lat) + '<br>' +
+        '<button>save</button>'
 
         this.setState({
           tempMarkerCoords: [lng, lat]
         })
-
-        //  var tempMarker =
-        //    <Marker
-        //      coordinates={[lng, lat]}>
-        //      <img className="marker" src={'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png'}/>
-        //    </Marker>
-        //
-        // this.setState({
-        //   routes: [...this.state, tempMarker]
-        // })
-
-
         // popup with coordinates and a form that takes a name
         // add route?
         // on submit send a post request
