@@ -35,7 +35,6 @@ class Maps extends Component {
       coordinates: this.state.coordinates
     }
     clientAuth.addRoute(newRoute).then(res => {
-      console.log(res.data)
       this.setState({
         routes: [
           ...this.state.routes,
@@ -46,7 +45,6 @@ class Maps extends Component {
       })
       this.refs.routeName.value = ""
       this.refs.rating.value = ""
-      console.log(res.data)
     })
   }
 
