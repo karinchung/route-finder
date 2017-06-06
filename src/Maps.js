@@ -9,9 +9,10 @@ class Maps extends Component {
   constructor() {
     super()
     this.state = {
-      map: null,
+      newRoute: null,
       routes: [],
-      tempMarkerCoords: null
+      tempMarkerCoords: null,
+      modal: null
     }
   }
 
@@ -23,40 +24,34 @@ class Maps extends Component {
     })
   }
 
-  _showCoordinates(theMap) {
-    console.log(theMap.lngLat)
+  _addRoute(evt) {
+    console.log(evt)
+  }
 
-    // must click twice PORQUE WHY
-    // console.log(theMap.lngLat)
-    if(!this.state.map) {
+  _showCoordinates(theMap) {
+    if(!this.state.newRoute) {
       theMap.on('click', (e) => {
         var lng = e.lngLat.lng
         var lat = e.lngLat.lat
-        console.log('lng: ', lng, 'lat: ', lat)
-
-        document.getElementById('info').innerHTML =
-        '<input type="text" placeholder="Route Name" />' + '<br>' +
-        '<input type="number" placeholder="Rating" />' + '<br>' +
+        var tempModal = document.getElementById('info')
+        tempModal.innerHTML =
+        '<span className="tempModal" style="display: block; text-align: right;">X</span>' +
+        '<input type="text" placeholder="Route Name" ref="routeName" />' +
+        '<input type="number" placeholder="Rating" ref="rating" />' + '<br>' +
         'lng: ' + JSON.stringify(lng) + ' ' +
         'lat: ' + JSON.stringify(lat) + '<br>' +
-        '<button>save</button>'
-
+        '<button className="button-primary" type="submit" onClick={this._addRoute.bind(this)}>save</button>'
         this.setState({
-          tempMarkerCoords: [lng, lat]
+          tempMarkerCoords: [lng, lat],
         })
-        // popup with coordinates and a form that takes a name
-        // add route?
-        // on submit send a post request
       })
-
       this.setState({
-        map: theMap
+        newRoute: theMap
       })
     }
   }
 
   render() {
-    console.log(this)
     const routes = this.state.routes.map((route, i) => {
       return (
         <Marker
@@ -66,15 +61,32 @@ class Maps extends Component {
         </Marker>
       )
     })
+    const divStyle = {
+      display: 'none'
+    }
+    const divStyleApplied = {
+      display: 'block'
+    }
     return (
       <div>
-        <pre id='info'>
-        </pre>
+        <div>
+          <input type="text" placeholder="location"></input>
+          <button type="submit">Search</button>
+        </div>
+
+        {/* <div id="menu">
+          <input className="streets" type="radio" value="streets" checked="checked"></input>
+          <label for='streets'>street</label>
+          <input className="satellite" type="radio" value="satellite"></input>
+          <label for='satellite'>satellite</label>
+        </div> */}
+
+        <div id='info' style={this.state.newRoute ? divStyleApplied : divStyle}></div>
         <div id='map'>
           <ReactMapboxGl
             style="mapbox://styles/mapbox/outdoors-v10"
             accessToken="pk.eyJ1Ijoia2FyaW5jaHVuZyIsImEiOiJjajNnZHU2Y2cwMDJtMzNwNTY5NzVyb2IxIn0.HcMKrOMyzfeRTqygjGWoOQ"
-            containerStyle={{height: "70vh"}}
+            containerStyle={{height: "80vh"}}
             zoom='9'
             // change below to user coordinates if allowed... or this
             center={[-116.147202, 34.001124]}
