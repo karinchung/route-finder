@@ -9,7 +9,9 @@ class Maps extends Component {
   constructor() {
     super()
     this.state = {
-      routes: []
+      map: null,
+      routes: [],
+      tempMarkerCoords: null
     }
   }
 
@@ -22,14 +24,44 @@ class Maps extends Component {
   }
 
   _showCoordinates(theMap) {
+    console.log(theMap.lngLat)
+
     // must click twice PORQUE WHY
+    // console.log(theMap.lngLat)
+    if(!this.state.map) {
       theMap.on('click', (e) => {
-        var lng = e.lngLat.Lng
-        var lat = e.lngLat.Lat
+        var lng = e.lngLat.lng
+        var lat = e.lngLat.lat
+        console.log('lng: ', lng, 'lat: ', lat)
+
+        document.getElementById('info').innerHTML =
+        'lng: ' + JSON.stringify(lng) + ' ' +
+        'lat: ' + JSON.stringify(lat)
+
+        this.setState({
+          tempMarkerCoords: [lng, lat]
+        })
+
+        //  var tempMarker =
+        //    <Marker
+        //      coordinates={[lng, lat]}>
+        //      <img className="marker" src={'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png'}/>
+        //    </Marker>
+        //
+        // this.setState({
+        //   routes: [...this.state, tempMarker]
+        // })
+
+
         // popup with coordinates and a form that takes a name
         // add route?
         // on submit send a post request
-    })
+      })
+
+      this.setState({
+        map: theMap
+      })
+    }
   }
 
   render() {
@@ -45,7 +77,8 @@ class Maps extends Component {
     })
     return (
       <div>
-        <pre id='info'></pre>
+        <pre id='info'>
+        </pre>
         <div id='map'>
           <ReactMapboxGl
             style="mapbox://styles/mapbox/outdoors-v10"
@@ -58,6 +91,13 @@ class Maps extends Component {
             >
             {/* All routes */}
             {routes}
+
+            {this.state.tempMarkerCoords && (
+              <Marker
+                coordinates={this.state.tempMarkerCoords}>
+                <img className="marker" src={'https://www.iconfinder.com/data/icons/gray-toolbar-4/512/map_marker-256.png'}/>
+              </Marker>
+            )}
           </ReactMapboxGl>
         </div>
       </div>

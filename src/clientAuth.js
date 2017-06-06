@@ -1,6 +1,8 @@
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
+// change name to FACTORY
+
 // change this after heroku
 axios.defaults.baseURL = 'http://localhost:3001'
 
