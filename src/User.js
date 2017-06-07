@@ -64,7 +64,9 @@ class User extends Component {
 render() {
   return (
       <div>
-          <button name='home' onClick={this._setView.bind(this)}>Home</button>
+          {!this.state.loggedIn && (
+            <button name='home' onClick={this._setView.bind(this)}>Home</button>
+          )}
           {!this.state.loggedIn && (
               <button name='signup' onClick={this._setView.bind(this)}>Sign Up</button>
           )}
@@ -72,7 +74,7 @@ render() {
             <button name='login' onClick={this._setView.bind(this)}>Log In</button>
           )}
           {this.state.loggedIn && (
-            <button onClick={this._logOut.bind(this)}>Log Out: {this.state.currentUser.name}</button>
+            <button className="logOut" onClick={this._logOut.bind(this)}>Log Out</button>
           )}
         {{
           home: <div id="map"><Maps /></div>,
@@ -82,6 +84,7 @@ render() {
       </div>
   )
 }
+// {this.state.currentUser.name}
 //// end component
 }
 

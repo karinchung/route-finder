@@ -15,7 +15,8 @@ class Maps extends Component {
       coordinates: [0, 0],
       modal: null,
       showModal: false,
-      center: [-116.147202, 34.001124]
+      center: [-116.147202, 34.001124],
+      style: 'roads'
     }
   }
 
@@ -75,6 +76,18 @@ class Maps extends Component {
     console.log(theMap)
   }
 
+  _handleOptionChangeRoad() {
+    this.setState({
+      style: 'roads'
+    })
+  }
+
+  _handleOptionChangeSatellite() {
+    this.setState({
+      style: 'satellite'
+    })
+  }
+
   render() {
     console.log(this.state.routes)
     const routes = this.state.routes.map((route, i) => {
@@ -89,17 +102,29 @@ class Maps extends Component {
 
     return (
       <div>
-        <div>
+        <div className="search">
           <input type="text" placeholder="location"></input>
           <button className="button-primary" type="submit">Search</button>
         </div>
 
-        {/* <div id="menu">
-          <input className="streets" type="radio" value="streets" checked="checked"></input>
-          <label for='streets'>street</label>
-          <input className="satellite" type="radio" value="satellite"></input>
-          <label for='satellite'>satellite</label>
-        </div> */}
+        <div className="styleRadio">
+          <form>
+          <label>
+            <input type="radio"
+              value="Roads"
+              checked={this.state.style === 'roads'}
+              onChange={this._handleOptionChangeRoad.bind(this)}/>
+            Roads
+          </label>
+          <label>
+            <input type="radio"
+              value="Satellite"
+              checked={this.state.style === 'satellite'}
+              onChange={this._handleOptionChangeSatellite.bind(this)}/>
+            Satellite
+          </label>
+          </form>
+        </div>
 
         <div id='info' style={this.state.showModal ? {display: 'block'} : {display: 'none'}}>
           <button onClick={this._closeModal.bind(this)} className="tempModal">x</button>
@@ -116,7 +141,7 @@ class Maps extends Component {
         </div>
         <div id='map'>
           <ReactMapboxGl
-            style="mapbox://styles/mapbox/outdoors-v10"
+            style={this.state.style === 'roads' ? "mapbox://styles/mapbox/outdoors-v10" : "mapbox://styles/mapbox/satellite-v9"}
             accessToken="pk.eyJ1Ijoia2FyaW5jaHVuZyIsImEiOiJjajNnZHU2Y2cwMDJtMzNwNTY5NzVyb2IxIn0.HcMKrOMyzfeRTqygjGWoOQ"
             containerStyle={{height: "80vh"}}
             zoom='9'
@@ -141,7 +166,7 @@ class Maps extends Component {
     )
     // end render
   }
-
+// end component
 }
 
 export default Maps

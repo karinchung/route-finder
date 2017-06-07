@@ -29,3 +29,7 @@
 .logInContainer > h2 {
   margin: 50px;
 }
+
+.logOut {
+  float: right;
+}

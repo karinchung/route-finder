@@ -34,6 +34,14 @@
   float: right;
 }
 
-/*.streets .satellite {
+.search {
   display: inline-block;
-}*/
+}
+
+.styleRadio {
+  display: inline-block;
+}
+
+label {
+  display: inline-block;
+}
