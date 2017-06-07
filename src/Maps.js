@@ -70,7 +70,8 @@ class Maps extends Component {
 
   _closeModal() {
     this.setState({
-      showModal: false
+      showModal: false,
+      tempMarkerCoords: null
     })
   }
 
@@ -93,7 +94,9 @@ class Maps extends Component {
   _markerClick(evt) {
     route.showRoute(evt.target.id).then(res => {
       this.setState({
-        popup: res.data
+        popup: res.data,
+        showModal: false,
+        tempMarkerCoords: null
       })
     })
   }
