@@ -16,7 +16,8 @@ class Maps extends Component {
       modal: null,
       showModal: false,
       center: [-116.147202, 34.001124],
-      style: 'roads'
+      style: 'roads',
+      popup: null
     }
   }
 
@@ -88,14 +89,27 @@ class Maps extends Component {
     })
   }
 
+  _markerClick(evt) {
+    route.showRoute(evt.target.id).then(res => {
+      this.setState({
+        popup: res.data
+      })
+    })
+  }
+
+  // _handlePopup(evt) {
+  //   console.log(evt)
+  //   // close popup if need? popup = false
+  // }
+
   render() {
-    console.log(this.state.routes)
     const routes = this.state.routes.map((route, i) => {
       return (
         <Marker
           key={i}
-          coordinates={route.coordinates}>
-          <img className="marker" src={'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png'}/>
+          coordinates={route.coordinates}
+          onClick={this._markerClick.bind(this)}>
+          <img id={route._id} className="marker" src={'http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png'}/>
         </Marker>
       )
     })
@@ -158,6 +172,14 @@ class Maps extends Component {
                 coordinates={this.state.tempMarkerCoords}>
                 <img className="marker" src={'https://www.iconfinder.com/data/icons/gray-toolbar-4/512/map_marker-256.png'}/>
               </Marker>
+            )}
+            {this.state.popup && (
+              <Popup
+                coordinates={this.state.popup.coordinates}
+                >
+                <p>Route Name: {this.state.popup.name}</p>
+                <p>Route Rating: {this.state.popup.rating}</p>
+              </Popup>
             )}
           </ReactMapboxGl>
         </div>

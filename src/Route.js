@@ -10,7 +10,14 @@ const route = {
     url: '/routes',
     method: 'get'
   })
-}
+},
+
+  showRoute: (id) => {
+    return axios({
+      url:`/routes/${id}`,
+      method: 'get'
+    })
+  }
 
 //// end route const
 }
