@@ -58,7 +58,8 @@ class Maps extends Component {
         this.setState({
           tempMarkerCoords: [lng, lat],
           coordinates: [lng, lat],
-          showModal: true
+          showModal: true,
+          popup: false
         })
       })
       this.setState({
@@ -97,10 +98,12 @@ class Maps extends Component {
     })
   }
 
-  // _handlePopup(evt) {
-  //   console.log(evt)
-  //   // close popup if need? popup = false
-  // }
+  _handlePopupClick(evt) {
+    console.log(evt)
+    this.setState({
+      popup: null
+    })
+  }
 
   render() {
     const routes = this.state.routes.map((route, i) => {
@@ -176,6 +179,7 @@ class Maps extends Component {
             {this.state.popup && (
               <Popup
                 coordinates={this.state.popup.coordinates}
+                onClick={this._handlePopupClick.bind(this)}
                 >
                 <p>Route Name: {this.state.popup.name}</p>
                 <p>Route Rating: {this.state.popup.rating}</p>
