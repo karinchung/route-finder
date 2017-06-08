@@ -75,10 +75,6 @@ class Maps extends Component {
     })
   }
 
-  _handleDrag(theMap) {
-    console.log(theMap)
-  }
-
   _handleOptionChangeRoad() {
     this.setState({
       style: 'roads'
@@ -108,6 +104,18 @@ class Maps extends Component {
     })
   }
 
+  _handleSearch(evt) {
+    evt.preventDefault()
+    const searchValue = {
+      center: this.refs.center.value
+    }
+    route.getGeocode(searchValue).then(res => {
+      this.setState({
+        center: [res.data.lng, res.data.lat]
+      })
+    })
+  }
+
   render() {
     const routes = this.state.routes.map((route, i) => {
       return (
@@ -123,8 +131,10 @@ class Maps extends Component {
     return (
       <div>
         <div className="search">
-          <input type="text" placeholder="location"></input>
-          <button className="button-primary" type="submit">Search</button>
+          <form onSubmit={this._handleSearch.bind(this)}>
+            <input type="text" placeholder="location" ref="center"></input>
+            <button className="button-primary" type="submit">Search</button>
+          </form>
         </div>
 
         <div className="styleRadio">
@@ -168,7 +178,6 @@ class Maps extends Component {
             // change below to user coordinates if allowed... or this
             center={this.state.center}
             onClick={this._showCoordinates.bind(this)}
-            onDrag={this._handleDrag.bind(this)}
             >
             {/* All routes */}
             {routes}

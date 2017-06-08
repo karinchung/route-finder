@@ -17,6 +17,14 @@ const route = {
       url:`/routes/${id}`,
       method: 'get'
     })
+  },
+
+  getGeocode: (searchValue) => {
+    return axios({
+      url: '/routes/local',
+      params: {searchValue: searchValue},
+      method: 'get'
+    })
   }
 
 //// end route const
