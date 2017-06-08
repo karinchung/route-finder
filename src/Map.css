@@ -1,12 +1,10 @@
-.mapboxgl-canvas {
-  position: inherit !important;
+label {
+  display: inline-block;
 }
 
-.marker {
-  height: 5px;
-  width: 5px;
+form {
+  margin: 0;
 }
-
 
 #info {
     /*display: block;*/
@@ -22,6 +20,19 @@
     background: #fff;
     position: absolute;
     z-index: 1000;
+}
+
+.App-header > h1 {
+  font-size: 4rem;
+}
+
+.mapboxgl-canvas {
+  position: inherit !important;
+}
+
+.marker {
+  height: 5px;
+  width: 5px;
 }
 
 .lng, .lat {
@@ -40,8 +51,10 @@
 
 .styleRadio {
   display: inline-block;
+  margin-left: 40px;
 }
 
-label {
-  display: inline-block;
+.routeName, .rating {
+  font-weight: 400;
+  font-size: 16px;
 }

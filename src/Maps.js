@@ -193,8 +193,9 @@ class Maps extends Component {
                 coordinates={this.state.popup.coordinates}
                 onClick={this._handlePopupClick.bind(this)}
                 >
-                <p>Route Name: {this.state.popup.name}</p>
-                <p>Route Rating: {this.state.popup.rating}</p>
+                <p className="routeName">{this.state.popup.name}</p>
+                <p className="rating">Rating: {this.state.popup.rating}</p>
+                <i class="fa fa-star" aria-hidden="true"></i>
               </Popup>
             )}
           </ReactMapboxGl>

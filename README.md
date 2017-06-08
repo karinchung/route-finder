@@ -43,3 +43,7 @@ This project has minimum css with [Skeleton](http://getskeleton.com/).
 This project utilizes the [Mapbox Api](https://www.mapbox.com/) to accomplish all cool map functionalities.
 
 This project uses a React wrapper for Mapbox made by [alex3165](https://github.com/alex3165/react-mapbox-gl).
+
+font awesome
+
+geocoder
