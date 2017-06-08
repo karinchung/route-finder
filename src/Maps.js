@@ -116,6 +116,10 @@ class Maps extends Component {
     })
   }
 
+  _handleFavorites() {
+    console.log('favorite me or dont')
+  }
+
   render() {
     const routes = this.state.routes.map((route, i) => {
       return (
@@ -195,7 +199,9 @@ class Maps extends Component {
                 >
                 <p className="routeName">{this.state.popup.name}</p>
                 <p className="rating">Rating: {this.state.popup.rating}</p>
-                <i class="fa fa-star" aria-hidden="true"></i>
+                <span><i onClick={this._handleFavorites.bind(this)}
+                         className="fa fa-star-o"
+                         aria-hidden="true" /></span>
               </Popup>
             )}
           </ReactMapboxGl>
