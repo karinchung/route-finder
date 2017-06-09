@@ -4,6 +4,7 @@ import './Map.css'
 import mapboxgl from 'mapbox-gl'
 import ReactMapboxGl, { Layer, Feature, Marker, Popup, Cluster } from "react-mapbox-gl"
 import route from './Route.js'
+import User from './User.js'
 
 class Maps extends Component {
   constructor() {
@@ -17,7 +18,9 @@ class Maps extends Component {
       showModal: false,
       center: [-116.147202, 34.001124],
       style: 'roads',
-      popup: null
+      popup: null,
+      route: null,
+      favorited: false
     }
   }
 
@@ -92,13 +95,13 @@ class Maps extends Component {
       this.setState({
         popup: res.data,
         showModal: false,
-        tempMarkerCoords: null
+        tempMarkerCoords: null,
+        route: res.data._id
       })
     })
   }
 
   _handlePopupClick(evt) {
-    console.log(evt)
     this.setState({
       popup: null
     })
@@ -116,8 +119,13 @@ class Maps extends Component {
     })
   }
 
-  _handleFavorites() {
-    console.log('favorite me or dont')
+  _handleFavorites(evt) {
+    const favoriteId = {
+      favoriteId: evt.target.id
+    }
+    clientAuth.favorite(favoriteId).then(res => {
+      console.log(res)
+    })
   }
 
   render() {
@@ -201,7 +209,9 @@ class Maps extends Component {
                 <p className="rating">Rating: {this.state.popup.rating}</p>
                 <span><i onClick={this._handleFavorites.bind(this)}
                          className="fa fa-star-o"
-                         aria-hidden="true" /></span>
+                         aria-hidden="true"
+                         id={this.state.route}
+                       /></span>
               </Popup>
             )}
           </ReactMapboxGl>

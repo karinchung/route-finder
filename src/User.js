@@ -84,7 +84,6 @@ render() {
       </div>
   )
 }
-// {this.state.currentUser.name}
 //// end component
 }
 

@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 // change name to FACTORY
 
 // change this after heroku
-axios.defaults.baseURL = 'http://localhost:3001' || 'https://climb-finder.herokuapp.com/' 
+axios.defaults.baseURL = 'http://localhost:3001' || 'https://climb-finder.herokuapp.com/'
 
 const clientAuth = {
 
@@ -59,6 +59,14 @@ const clientAuth = {
       url: '/routes',
       method: 'post',
       data: newRoute
+    })
+  },
+
+  favorite: (favoritedId) => {
+    return axios({
+      url: '/routes/favorites',
+      method: 'post',
+      data: favoritedId
     })
   }
 //// end const
