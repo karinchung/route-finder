@@ -79,7 +79,8 @@ render() {
         {{
           home: <div id="map"><Maps /></div>,
           login: <LogIn onLogin={this._logIn.bind(this)} />,
-          signup: <SignUp onSignup={this._signUp.bind(this)} />
+          signup: <SignUp onSignup={this._signUp.bind(this)} />,
+          // user: <Favorites />
         }[this.state.view]}
       </div>
   )
