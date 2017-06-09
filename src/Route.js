@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
-axios.defaults.baseURL = 'https://climb-finder.herokuapp.com/' || 'http://localhost:3001' 
+axios.defaults.baseURL = 'https://climb-finder.herokuapp.com/'  || 'http://localhost:3001' 
 
 // all users can access this info, if logged in, clientAuth
 const route = {

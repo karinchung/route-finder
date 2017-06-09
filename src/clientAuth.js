@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 // change name to FACTORY
 
 // change this after heroku
-axios.defaults.baseURL = 'https://climb-finder.herokuapp.com/' || 'http://localhost:3001'
+axios.defaults.baseURL = 'https://climb-finder.herokuapp.com/' || 'http://localhost:3001' 
 
 const clientAuth = {
 

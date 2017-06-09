@@ -1,14 +1,26 @@
 # Route Finder
 
+![](route-finder.png)
+
 A user generated rock climbing route finder. Looking for a route to climb? Found a route and want to share it? Route Finder helps people from all over the globe share routes and make their search for the perfect climb easier!
 
-To get started, click here!
+Get started here:
+
+[Client Link](https://climb-finder.herokuapp.com/)
+
+[Client Git Link](https://github.com/karinchung/route-finder)
+
+[Server Link ](https://glacial-cliffs-19468.herokuapp.com/)
+
+[Server Git Link](https://github.com/karinchung/route-finder-server)
 
 ## How to Use
 
 Anyone can see all of the routes that users have input into the site.
 
 **Adding a Route**
+
+![](add-route.png)
 
 To add your own route you must have an account.
 
@@ -26,7 +38,14 @@ Only the site admin can delete or edit routes. To request that your route be del
 
 **MVP**
 
+- Full CRUD on a map API
+- Creating your own routes
+- User authentication
+
 **Feature Log**
+
+- Favorites Page
+- The ability to create a task lisk of routes
 
 ## Technologies
 
@@ -38,12 +57,12 @@ Only the site admin can delete or edit routes. To request that your route be del
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-This project has minimum css with [Skeleton](http://getskeleton.com/).
+This product has minimum css with [Skeleton](http://getskeleton.com/).
 
-This project utilizes the [Mapbox Api](https://www.mapbox.com/) to accomplish all cool map functionalities.
+This product utilizes the [Mapbox Api](https://www.mapbox.com/) to accomplish all cool map functionalities.
 
 This project uses a React wrapper for Mapbox made by [alex3165](https://github.com/alex3165/react-mapbox-gl).
 
-font awesome
+This app knows where you are with [node-geocoder](https://www.npmjs.com/package/node-geocoder)
 
-geocoder
+This product has an awesome icon with [Font Awesome](http://fontawesome.io/)
