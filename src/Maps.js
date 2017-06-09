@@ -19,8 +19,8 @@ class Maps extends Component {
       center: [-116.147202, 34.001124],
       style: 'roads',
       popup: null,
-      route: null,
-      favorited: false
+      route: null
+      // favorited: false
     }
   }
 

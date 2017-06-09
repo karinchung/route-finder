@@ -6,6 +6,7 @@ import ReactMapboxGl, { Layer, Feature, Marker, Popup } from "react-mapbox-gl"
 import Maps from './Maps'
 import clientAuth from './clientAuth'
 import User from './User.js'
+import Favorites from './Favorites.js'
 
 class App extends Component {
   render() {
