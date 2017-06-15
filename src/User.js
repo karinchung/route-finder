@@ -68,9 +68,9 @@ render() {
           {this.state.loggedIn && (
             <button name='home' onClick={this._setView.bind(this)}>Home</button>
           )}
-          {this.state.loggedIn && (
+          {/* {this.state.loggedIn && (
             <button name='user' onClick={this._setView.bind(this)}>My Favorites</button>
-          )}
+          )} */}
           {!this.state.loggedIn && (
               <button name='signup' onClick={this._setView.bind(this)}>Sign Up</button>
           )}
@@ -84,7 +84,7 @@ render() {
           home: <div id="map"><Maps /></div>,
           login: <LogIn onLogin={this._logIn.bind(this)} />,
           signup: <SignUp onSignup={this._signUp.bind(this)} />,
-          user: <div id="map"><Favorites /></div>
+          // user: <div id="map"><Favorites /></div>
         }[this.state.view]}
       </div>
   )
