@@ -39,7 +39,9 @@ class Maps extends Component {
       rating: this.refs.rating.value,
       coordinates: this.state.coordinates
     }
+    console.log(newRoute)
     clientAuth.addRoute(newRoute).then(res => {
+      console.log('add new Route clicked')
       this.setState({
         routes: [
           ...this.state.routes,
