@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
-axios.defaults.baseURL = 'https://climb-finder.herokuapp.com'
+axios.defaults.baseURL = 'https://glacial-cliffs-19468.herokuapp.com/'
 // 'http://localhost:3001' ||
 
 // all users can access this info, if logged in, clientAuth
